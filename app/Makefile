@@ -50,15 +50,17 @@ $(info ************ LOGGING ENABLED ************)
 endif
 
 ifndef COIN
-COIN=ATOM
+COIN=LN
 endif
 
 $(info COIN  = [$(COIN)])
 
-ifeq ($(COIN),ATOM)
 # Main app configuration
-APPNAME = "Cosmos"
-APPPATH = "44'/118'"
+ifeq ($(COIN),ATOM)
+COIN_TYPE=118
+else
+ifeq ($(COIN),LN)
+COIN_TYPE=438
 else
 define error_message
 
@@ -69,6 +71,11 @@ COIN value not supported: [$(COIN)]
 endef
 $(error "$(error_message)")
 endif
+endif
+
+APPNAME="Cosmos"
+APPPATH="44'/$(COIN_TYPE)'"
+HDPATH_1_DEFAULT="(0x80000000u | "$(COIN_TYPE)"u)"
 
 APP_LOAD_PARAMS = --delete $(COMMON_LOAD_PARAMS) --path $(APPPATH)
 
@@ -171,7 +178,7 @@ endif
 #########################
 
 CC := $(CLANGPATH)clang
-CFLAGS += -O3 -Os -Wno-unknown-pragmas -Wno-unused-parameter
+CFLAGS += -O3 -Os -Wno-unknown-pragmas -Wno-unused-parameter -DHDPATH_1_DEFAULT=$(HDPATH_1_DEFAULT)
 
 AS := $(GCCPATH)arm-none-eabi-gcc
 AFLAGS +=
