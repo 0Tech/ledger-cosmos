@@ -190,8 +190,10 @@ The Makefile will build the firmware in a docker container and leave the binary 
 
 - Build
 
+   You should set `COIN` environment if you want to use a coin type other than the default ATOM.
+
    ```
-   make                # Builds the app
+   COIN=$COIN make                # Builds the app
    ```
 
 - Upload to a device
