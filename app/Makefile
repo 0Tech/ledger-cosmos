@@ -57,9 +57,11 @@ $(info COIN  = [$(COIN)])
 
 # Main app configuration
 ifeq ($(COIN),ATOM)
+APPNAME="Cosmos"
 COIN_TYPE=118
 else
 ifeq ($(COIN),LN)
+APPNAME="Link"
 COIN_TYPE=438
 else
 define error_message
@@ -73,7 +75,6 @@ $(error "$(error_message)")
 endif
 endif
 
-APPNAME="Cosmos"
 APPPATH="44'/$(COIN_TYPE)'"
 HDPATH_1_DEFAULT="(0x80000000u | "$(COIN_TYPE)"u)"
 
@@ -178,7 +179,7 @@ endif
 #########################
 
 CC := $(CLANGPATH)clang
-CFLAGS += -O3 -Os -Wno-unknown-pragmas -Wno-unused-parameter -DHDPATH_1_DEFAULT=$(HDPATH_1_DEFAULT)
+CFLAGS += -O3 -Os -Wno-unknown-pragmas -Wno-unused-parameter -DHDPATH_1_DEFAULT=$(HDPATH_1_DEFAULT) -DAPPNAME=$(APPNAME)
 
 AS := $(GCCPATH)arm-none-eabi-gcc
 AFLAGS +=
