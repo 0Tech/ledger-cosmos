@@ -494,6 +494,14 @@ static const key_subst_t key_substitutions[] = {
         {"msgs/value/amount",                 "Amount"},
         {"msgs/value/voter",                  "Description"},
         {"msgs/value/option",                 "Option"},
+
+        {"msgs/value/address",                "Address"},
+        {"msgs/value/proposers",              "Proposers"},
+        {"msgs/value/metadata",               "Metadata"},
+        {"msgs/value/messages",               "Messages"},
+        {"msgs/value/exec",                   "Execute"},
+        {"msgs/value/signer",                 "Signer"},
+        {"msgs/value/from",                   "From"},
 };
 
 parser_error_t tx_display_make_friendly() {
